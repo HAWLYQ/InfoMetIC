@@ -3,7 +3,7 @@ By Anwen Hu, Shizhe Chen, Liang Zhang, Qin Jin
 
 
 ## Requirements
-torch >= 1.7
+torch >= 1.7, numpy >= 1.19.2, scipy >= 1.7.1
 
 ## Evaluate Image Captioning results on MSCOCO
 1.download preprocessed image features, put in ./infometic/data 

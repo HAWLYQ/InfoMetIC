@@ -3,9 +3,6 @@ from torch.utils.data import DataLoader
 import torch.nn as nn
 import torch.optim as optim
 import torch
-import time
-from tqdm import tqdm
-import copy
 import os
 import lmdb
 import numpy as np
