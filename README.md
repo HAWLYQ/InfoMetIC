@@ -7,8 +7,11 @@ torch >= 1.7
 
 ## Evaluate Image Captioning results on MSCOCO
 1.download preprocessed image features, put in ./infometic/data 
+
 2.download model, put in ./infometic/save
-3.run inference code
+
+3.run inference code as follows:
+
 ```
 cd infometic
 python inference.py --image {mscoco_image_name} --caption {caption}
