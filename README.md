@@ -8,7 +8,7 @@ torch >= 1.7, numpy >= 1.19.2, scipy >= 1.7.1
 ## Evaluate Image Captioning results on MSCOCO
 1.download preprocessed image features, put in ./infometic/data 
 
-2.download model, put in ./infometic/save
+2.download the checkpoint from google driver (https://drive.google.com/drive/folders/1LZRZ-Q24_PRfpvRvwBlkldkBk9zGdTHM?usp=sharing) , put in ./infometic/save
 
 3.run inference code as follows:
 
