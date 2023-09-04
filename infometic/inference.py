@@ -25,7 +25,6 @@ def parse_opt():
     
     # inference setting
     parser.add_argument('--batch_size', type=int, default=500, help='the batch size of each gpu')
-    # parser.add_argument('--checkpoint_path', type=str, default='save/clip-seq-global-scale_lr1e4_flickr30k/model_3.pth', help='checkpoint to inference')
     parser.add_argument('--checkpoint_path', type=str, default='save/infometic/best_model.pth', help='checkpoint to inference')
     parser.add_argument('--clip_score', action='store_true', help='calculate clip score, ignore proposed model.')
     parser.add_argument('--finetune_backbone', type=bool, default=False, help='whether to finetune CLIP backbone')
