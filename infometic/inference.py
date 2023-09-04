@@ -14,13 +14,15 @@ from scipy.stats import pearsonr
 from clip_info.simple_tokenizer import SimpleTokenizer as _Tokenizer
 import json
 import argparse
-from utils import save_scores, F1
 import math
 import io
 from icecream import ic
 
 def parse_opt():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--image', type=str, default='COCO_val2014_000000197461.jpg', help='image name')
+    parser.add_argument('--caption', type=str, default=' A very large sheep is standing under clouds.', help='caption')
+    
     # inference setting
     parser.add_argument('--batch_size', type=int, default=500, help='the batch size of each gpu')
     # parser.add_argument('--checkpoint_path', type=str, default='save/clip-seq-global-scale_lr1e4_flickr30k/model_3.pth', help='checkpoint to inference')
@@ -36,6 +38,7 @@ def parse_opt():
     parser.add_argument('--text_length', type=int, default=32, help='the length of bpe token sequence in CLIP(including sot and ent)')
     parser.add_argument('--bbox_text_length', type=int, default=10, help='the length of bpe token sequence of object word(including sot and ent)')
 
+    # ii: vision recall score; tt: text precision score; it: global vision-text score
     parser.add_argument('--global_type', type=str, default='it-ii-tt', choices=['it','ii', 'tt','it-ii', 'it-tt', 'ii-tt', 'it-ii-tt'])
     parser.add_argument('--use_cross_att', type=bool, default=True, help='whether to use cross attention after multimodal transformer, set true when ii or tt in global')
     parser.add_argument('--keep_clip_global', type=bool, default=True, help='whether to fix clip global features, conflict with it global type')
@@ -138,9 +141,9 @@ def process_text(caption, max_text_length, tokenizer):
 
     
 class MSCOCO_Infer():
-    def __init__(self, image_lmdb, fn2imgid_path):
+    def __init__(self, opt, image_lmdb, fn2imgid_path):
         # read settings
-        self.opt = parse_opt()
+        self.opt = opt
         assert self.opt.global_type == 'it-ii-tt'
         # load model
         self.model = CLIPSeqModel(self.opt)
@@ -220,13 +223,12 @@ class MSCOCO_Infer():
 
 
 if __name__ == '__main__':
-    image_name = 'COCO_val2014_000000197461.jpg'
-    # caption = ' A very large sheep is standing'
-    # caption = ' A very large sheep is standing in the grass.'
-    caption = ' A very large sheep is standing under clouds.'
+    opt = parse_opt()
+    image_name = opt.image
+    caption = opt.caption
 
     # initialize the evaluator for mscoco image captioning
-    infometic_mscoco = MSCOCO_Infer(image_lmdb='./data/mscoco_vit32_lmdb/', fn2imgid_path='./data/coco_fn2imgid.json')
+    infometic_mscoco = MSCOCO_Infer(opt=opt, image_lmdb='./data/mscoco_vit32_lmdb/', fn2imgid_path='./data/coco_fn2imgid.json')
     # perform evaluation
     infometic_r, infometic_p, infometic, infometic_plus, bbox_and_scores, text_token_and_scores= infometic_mscoco.evaluate(image_name=image_name, caption=caption)
     print('InfoMetIC Vision Recall Score:', infometic_r)
