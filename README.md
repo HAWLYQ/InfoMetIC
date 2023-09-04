@@ -11,6 +11,10 @@ torch >= 1.7
 cd infometic
 python inference.py --image {mscoco_image_name} --caption {caption}
 ```
+for example,
+```
+python inference.py --image 'COCO_val2014_000000197461.jpg' --caption ' A very large sheep is standing under clouds.'
+```
 
 ## Training and Evaluation on benchmarks are on the way...
 
