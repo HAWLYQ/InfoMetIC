@@ -6,9 +6,9 @@ By Anwen Hu, Shizhe Chen, Liang Zhang, Qin Jin
 torch >= 1.7, numpy >= 1.19.2, scipy >= 1.7.1
 
 ## Evaluate Image Captioning results on MSCOCO
-1.download preprocessed image features (119G) from baidu netdisk (will be uploaded within 2 days), put in ./infometic/data 
+1.download preprocessed image features (119G) from baidu netdisk (https://pan.baidu.com/s/19ATjvsFBgQQSYG2iA-GIKg, psw:Bd59), put it under ./infometic/data 
 
-2.download the checkpoint (462M) from google driver (https://drive.google.com/drive/folders/1LZRZ-Q24_PRfpvRvwBlkldkBk9zGdTHM?usp=sharing) , put in ./infometic/save
+2.download the checkpoint (462M) from google driver (https://drive.google.com/drive/folders/1LZRZ-Q24_PRfpvRvwBlkldkBk9zGdTHM?usp=sharing) , put it under ./infometic/save
 
 3.run inference code as follows:
 
